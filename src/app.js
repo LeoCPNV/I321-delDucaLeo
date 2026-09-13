@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const router = require('./routes/router');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -24,11 +25,6 @@ app.get('/docs/swagger.json', (req, res) => {
 app.get('/', (req, res) => res.json({ status: 'ok' }));
 
 // error handler (fallback)
-app.use((err, req, res, next) => {
-    console.error(err);
-    if (!res.headersSent) {
-        res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
-    } else next(err);
-});
+app.use(errorHandler);
 
 module.exports = app;

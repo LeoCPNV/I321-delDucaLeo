@@ -2,6 +2,7 @@
 const express = require('express');
 const { body, param } = require('express-validator');
 const productController = require('../controllers/productController');
+const validate = require('../middlewares/validate');
 
 const router = express.Router();
 
@@ -112,9 +113,9 @@ const createAndUpdateValidations = [
 ];
 
 router.get('/', productController.findAll);
-router.post('/', createAndUpdateValidations, productController.create);
-router.get('/:id', [param('id').isInt().withMessage('id must be an integer')], productController.findOne);
-router.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], productController.update);
-router.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], productController.delete);
+router.post('/', createAndUpdateValidations, validate, productController.create);
+router.get('/:id', [param('id').isInt().withMessage('id must be an integer')], validate, productController.findOne);
+router.put('/:id', [param('id').isInt().withMessage('id must be an integer'), ...createAndUpdateValidations], validate, productController.update);
+router.delete('/:id', [param('id').isInt().withMessage('id must be an integer')], validate, productController.delete);
 
 module.exports = router;
