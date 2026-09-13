@@ -31,18 +31,30 @@ A simple RESTful API to manage products (CRUD) built with **Express**, **SQLite3
     │   server.js
     │
     ├───config
-    │       database.js
     │       swagger.js
     │
     ├───controllers
     │       productController.js
     │
-    ├───entities
-    │       Product.js
+    ├───db
+    │       database.js
     │
-    └───routes
-            products.js
-            router.js
+    ├───middlewares
+    │       errorHandler.js
+    │       validate.js
+    │
+    ├───repositories
+    │       productRepository.js
+    │
+    ├───routes
+    │       products.js
+    │       router.js
+    │
+    ├───services
+    │       productService.js
+    │
+    └───tests
+            productRepository.test.js
 ```
 
 ## Installation
